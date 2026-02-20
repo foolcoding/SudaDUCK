@@ -53,12 +53,12 @@
 
 | **이승엽 (Infra)** |
 | :--- |
-| • Docker 기반 Dev/Prod 환경 격리 및 가상 네트워크 설계 |
-| • Jenkins Pipeline을 활용한 CI/CD |
-| • Blue-Green 무중단 배포 구현 |
-| • Mattermost Webhook 기반 실시간 배포 알림 자동화 |
-| • API 연동 통합 디버깅 지원 및 UI/UX 개선 협력 |
-
+| • 개발 및 운영 환경 격리 (Docker): 독립적인 가상 네트워크로 운영과 개발 환경 분리 |
+| • 무중단 배포 구축: Jenkins Pipeline과 Blue-Green 방식을 적용한 안정적인 CI/CD 환경 구축 |
+| • 배포 알림 자동화: Mattermost Webhook 연동을 통한 실시간 배포 알림 파이프라인 구축 및 신속한 디버깅 환경 지원 |
+| • API 리팩토링: 기존 방 생성·참가 및 OpenVidu 세션 API를 하나로 통합하여 데이터 정합성 확보 |
+| • UX 고도화: STOMP 소켓 API를 활용해 진행 상태를 시각화하고, 전원 완료 시 다음 페이즈로 전환되는 동기화 로직 구현 등 |
+| • 예외 처리 및 디버깅: 비정상 이탈 시 세션 초기화 및 상태 동기화 등 서비스 안정성 향상 기여 |
 <br>
 
 | **전연수 (FE)** |
@@ -125,26 +125,110 @@
 
 <br><br>
 
-## 기술 스택
+## 🛠️ 기술 스택
 
-### Development
-| 분류 | 기술 스택 | 상세 역할 |
-| :--- | :--- | :--- |
-| **Frontend** | `React` | 컴포넌트 기반 아키텍처를 통한 UI 재사용성 확보 |
-| **Backend** | `Java`, `Spring Boot` | 비즈니스 로직 및 서비스 안정성 구축 |
-| **Security** | `Spring Security`, `JPA` | 보안 체계 및 데이터 영속성 관리 |
-| **Database** | `MySQL 8.0` | 사용자 정보 및 대화 로그 등 영구 데이터 관리 |
-| **Caching** | `Redis` | 세션 관리, 실시간 턴 관리 및 타이머 데이터 캐싱 |
-| **Real-time** | `OpenVidu (SFU)`, `WebSocket` | WebRTC 기반 안정적인 미디어 스트리밍 및 실시간 통신 |
+<a name="stack"></a>
 
-### AI Integration
-| 분류 | 기술 스택 | 상세 역할 |
-| :--- | :--- | :--- |
-| **LLM** | `GPT-4o mini` | 문법 교정, 학습 스크립트/퀴즈 생성 및 비속어 필터링 |
-| **STT** | `Whisper API` | 고성능 음성 인식 및 데이터 전처리 |
-| **Voice** | `Azure Speech` | 자연스러운 가이드 음성 합성(TTS) 및 발음 평가 피드백 |
+### 🎨 Frontend
+
+<div align="center">
+
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+<img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white">
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+<img src="https://img.shields.io/badge/OpenVidu-000000?style=for-the-badge&logo=webrtc&logoColor=white">
 
 <br><br>
+
+| Category | Stack |
+| :---: | :--- |
+| **Language** | JavaScript |
+| **Runtime Environment** | Node.js 24.12.0 |
+| **Framework** | React 19.2.0, React Router 7.12.0 |
+| **Library** | OpenVidu Browser 2.25.0, STOMP.js 7.2.1, SockJS Client 1.6.1,<br> Axios 1.13.4 |
+| **Build Tool** | Vite 7.2.4 |
+| **IDE** | Visual Studio Code |
+
+</div>
+
+### 💻 Backend
+
+<div align="center">
+
+<img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
+<img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=openjdk&logoColor=white">
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+<img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white">
+<img src="https://img.shields.io/badge/SpringSecurity-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white">
+<img src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens">
+<img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black">
+
+<br><br>
+
+| Category | Stack |
+| :---: | :--- |
+| **Language** | Java 17 (Eclipse Temurin JDK) |
+| **Framework** | Spring Boot 3.5.9 |
+| **Library** | Spring Security, Spring Data JPA, Spring Data Redis,<br> Spring Security OAuth2 Client, Spring WebSocket,<br> OpenVidu Java Client 2.25.0, JJWT 0.12.3, Springdoc OpenAPI 2.3.0 |
+| **Database** | MySQL 8.0.43, Redis (Alpine) |
+| **IDE** | IntelliJ IDEA (Ultimate Edition) |
+| **Build Tool** | Gradle 8.14.3 |
+
+</div>
+
+### 🤖 AI Integration
+
+<div align="center">
+
+<img src="https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white">
+<img src="https://img.shields.io/badge/Azure_Speech-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white">
+
+<br><br>
+
+| Category | Stack |
+| :---: | :--- |
+| **LLM Model** | GPT-4o mini |
+| **API Service** | MS Cognitive Services Speech 1.47.0 (Azure TTS/STT),<br> OpenAI Whisper API |
+| **Feature** | 실시간 발음 평가, 비동기 음성 처리, 문법 교정 |
+
+</div>
+
+### ⚙️ DevOps
+
+<div align="center">
+
+<img src="https://img.shields.io/badge/AWS%20EC2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white">
+<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white">
+<img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white">
+<img src="https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white">
+
+<br><br>
+
+| Category | Spec |
+| :---: | :--- |
+| **Instance Type** | AWS EC2 (Ubuntu 20.04 LTS) |
+| **Container** | Docker Engine, Docker Compose v3.8 |
+| **CI/CD** | Jenkins LTS (Docker-in-Docker) |
+| **Web Server** | Nginx Latest |
+| **Media Server** | OpenVidu Server 2.25.0 (Pro Edition / Host Network) |
+| **Notification** | Mattermost Webhook |
+
+</div>
+
+### 🤝 Collaboration
+
+<div align="center">
+
+<img src="https://img.shields.io/badge/GitLab-FC6D26?style=for-the-badge&logo=gitlab&logoColor=white">
+<img src="https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=jira&logoColor=white">
+<img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white">
+<img src="https://img.shields.io/badge/Mattermost-0072C6?style=for-the-badge&logo=mattermost&logoColor=white">
+<img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
+<img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white">
+
+</div>
+<br>
 
 ## Project Documents
 
@@ -167,4 +251,3 @@
 ## 시스템 아키텍처
 
 <img src="assets/images/architecture.png" width="100%"/>
-
